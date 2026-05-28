@@ -1,91 +1,246 @@
+# Advanced AI Aesthetic To-Do App
+
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Aesthetic AI To-Do</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Aesthetic To-Do</title>
 
-    <style>
-        body {
-            font-family: 'Segoe UI';
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            text-align: center;
-        }
+<style>
 
-        .container {
-            width: 380px;
-            margin: 50px auto;
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        h2 {
-            margin-bottom: 5px;
-        }
+body{
+    font-family:'Segoe UI';
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    transition:0.4s;
+    overflow-x:hidden;
+}
 
-        #clock {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
+.dark{
+    background:linear-gradient(135deg,#1e1e2f,#151521);
+    color:white;
+}
 
-        input, select {
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            margin: 5px;
-        }
+.container{
+    width:400px;
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(15px);
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+    animation:fade 0.8s ease;
+}
 
-        button {
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
-        .add { background: #6c5ce7; color: white; }
-        .delete { background: #ff7675; color: white; }
-        .done { background: #00b894; color: white; }
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
 
-        li {
-            list-style: none;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            background: white;
-        }
+#clock{
+    text-align:center;
+    margin-bottom:15px;
+    font-size:14px;
+}
 
-        .completed {
-            text-decoration: line-through;
-            color: gray;
-        }
+.quote{
+    text-align:center;
+    font-size:13px;
+    margin-bottom:15px;
+    opacity:0.8;
+}
 
-        .high { border-left: 5px solid red; }
-        .medium { border-left: 5px solid orange; }
-        .low { border-left: 5px solid green; }
+.top{
+    display:flex;
+    gap:10px;
+    margin-bottom:10px;
+}
 
-        .filters button {
-            margin: 3px;
-            background: black;
-            color: white;
-        }
-    </style>
+input,select{
+    padding:10px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+}
+
+#task{
+    flex:1;
+}
+
+button{
+    border:none;
+    border-radius:12px;
+    padding:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.add{
+    background:#6c5ce7;
+    color:white;
+}
+
+.done{
+    background:#00b894;
+    color:white;
+}
+
+.delete{
+    background:#ff7675;
+    color:white;
+}
+
+.theme{
+    background:black;
+    color:white;
+    width:100%;
+    margin-bottom:10px;
+}
+
+.search{
+    width:100%;
+    margin-bottom:10px;
+}
+
+.filters{
+    display:flex;
+    justify-content:center;
+    gap:5px;
+    margin-bottom:15px;
+}
+
+.filters button{
+    background:black;
+    color:white;
+}
+
+.progress-container{
+    width:100%;
+    height:12px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background:#6c5ce7;
+    transition:0.5s;
+}
+
+ul{
+    padding:0;
+}
+
+li{
+    list-style:none;
+    background:white;
+    margin-bottom:12px;
+    padding:12px;
+    border-radius:15px;
+    animation:slide 0.3s ease;
+}
+
+.dark li{
+    background:#2c2c3f;
+}
+
+@keyframes slide{
+    from{
+        opacity:0;
+        transform:translateX(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.completed{
+    text-decoration:line-through;
+    opacity:0.6;
+}
+
+.high{
+    border-left:6px solid red;
+}
+
+.medium{
+    border-left:6px solid orange;
+}
+
+.low{
+    border-left:6px solid green;
+}
+
+small{
+    opacity:0.7;
+}
+
+.empty{
+    text-align:center;
+    opacity:0.6;
+    margin-top:20px;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
-    <h2>🌸 Aesthetic AI To-Do</h2>
+
+    <h1>🌸 AI Aesthetic To-Do</h1>
+
     <div id="clock"></div>
 
-    <input id="task" placeholder="Enter task ✨">
-    <select id="priority">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-    </select>
+    <div class="quote" id="quote"></div>
 
-    <button class="add" onclick="add()">Add</button>
+    <button class="theme" onclick="toggleTheme()">🌙 Toggle Theme</button>
+
+    <input type="text" id="search" class="search" placeholder="🔍 Search tasks..." onkeyup="load()">
+
+    <div class="top">
+        <input type="text" id="task" placeholder="Enter task ✨">
+
+        <select id="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+    </div>
+
+    <div class="top">
+        <input type="date" id="due">
+        <button class="add" onclick="add()">Add</button>
+    </div>
 
     <div class="filters">
         <button onclick="filterTasks('all')">All</button>
@@ -93,104 +248,195 @@
         <button onclick="filterTasks('pending')">Pending</button>
     </div>
 
+    <div class="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+
     <p id="count"></p>
 
     <ul id="list"></ul>
 
-    <button onclick="clearAll()">Clear All</button>
+    <div class="empty" id="empty"></div>
+
+    <button class="delete" style="width:100%" onclick="clearAll()">Clear All</button>
+
 </div>
 
 <script>
+
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 let currentFilter = "all";
 
-function save() {
-    localStorage.setItem("todos", JSON.stringify(todos));
+const quotes = [
+    "✨ Small steps every day",
+    "🚀 Productivity creates success",
+    "🌸 Stay consistent",
+    "💡 Focus on progress, not perfection",
+    "🔥 Discipline beats motivation"
+];
+
+document.getElementById("quote").innerText =
+quotes[Math.floor(Math.random()*quotes.length)];
+
+function save(){
+    localStorage.setItem("todos",JSON.stringify(todos));
 }
 
-function load() {
+function load(){
+
     let list = document.getElementById("list");
+    let search = document.getElementById("search").value.toLowerCase();
+
     list.innerHTML = "";
 
-    let filtered = todos.filter(t => {
-        if(currentFilter === "done") return t.done;
-        if(currentFilter === "pending") return !t.done;
-        return true;
+    let filtered = todos.filter(t=>{
+
+        let matchFilter =
+            currentFilter==="all" ? true :
+            currentFilter==="done" ? t.done :
+            !t.done;
+
+        let matchSearch =
+            t.text.toLowerCase().includes(search);
+
+        return matchFilter && matchSearch;
     });
 
-    filtered.forEach((t, i) => {
+    if(filtered.length===0){
+        document.getElementById("empty").innerHTML =
+        "✨ No tasks found";
+    }else{
+        document.getElementById("empty").innerHTML = "";
+    }
+
+    filtered.forEach((t,i)=>{
+
         let li = document.createElement("li");
+
         li.className = t.priority;
 
         li.innerHTML = `
             <span class="${t.done ? 'completed' : ''}">
                 ${t.text}
             </span>
+
             <br>
-            <small>${t.time}</small>
+
+            <small>
+                📅 ${t.time}
+            </small>
+
             <br>
-            <button class="done" onclick="toggle(${i})">✔</button>
-            <button class="delete" onclick="del(${i})">❌</button>
+
+            <small>
+                ⏰ Due: ${t.due || "Not Set"}
+            </small>
+
+            <br><br>
+
+            <button class="done" onclick="toggle(${i})">
+                ✔
+            </button>
+
+            <button class="delete" onclick="del(${i})">
+                ❌
+            </button>
         `;
 
         list.appendChild(li);
+
     });
 
+    let completed = todos.filter(t=>t.done).length;
+
     document.getElementById("count").innerText =
-        "Total: " + todos.length + " | Completed: " + todos.filter(t=>t.done).length;
+    `Total: ${todos.length} | Completed: ${completed}`;
+
+    let progress =
+    todos.length===0 ? 0 :
+    (completed/todos.length)*100;
+
+    document.getElementById("progress").style.width =
+    progress + "%";
 }
 
-function add() {
-    let text = document.getElementById("task").value;
-    let priority = document.getElementById("priority").value;
+function add(){
 
-    if(text.trim() === "") return;
+    let text =
+    document.getElementById("task").value;
+
+    let priority =
+    document.getElementById("priority").value;
+
+    let due =
+    document.getElementById("due").value;
+
+    if(text.trim()==="") return;
 
     todos.push({
         text,
-        done: false,
-        time: new Date().toLocaleString(),
-        priority
+        priority,
+        due,
+        done:false,
+        time:new Date().toLocaleString()
     });
 
     save();
     load();
 
-    document.getElementById("task").value = "";
+    document.getElementById("task").value="";
 }
 
-function del(i) {
-    todos.splice(i, 1);
+function del(i){
+    todos.splice(i,1);
     save();
     load();
 }
 
-function toggle(i) {
+function toggle(i){
     todos[i].done = !todos[i].done;
     save();
     load();
 }
 
-function clearAll() {
-    todos = [];
-    save();
+function clearAll(){
+
+    if(confirm("Delete all tasks?")){
+        todos=[];
+        save();
+        load();
+    }
+}
+
+function filterTasks(type){
+    currentFilter=type;
     load();
 }
 
-function filterTasks(type) {
-    currentFilter = type;
-    load();
-}
+function updateClock(){
 
-function updateClock() {
     document.getElementById("clock").innerText =
-        new Date().toLocaleTimeString();
+    new Date().toLocaleString();
+
 }
 
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
+
+function toggleTheme(){
+    document.body.classList.toggle("dark");
+}
+
+document.getElementById("task")
+.addEventListener("keypress",function(e){
+    if(e.key==="Enter"){
+        add();
+    }
+});
 
 load();
+
 </script>
 
 </body>
 </html>
+```
