@@ -72,14 +72,6 @@ in your browser 🌸
 
 ---
 
-# 📸 Preview
-
-✨ Modern UI with smooth animations and aesthetic design.
-
-(Add your project screenshot here)
-
----
-
 # 💡 Features & Benefits
 
 🎯 **Simple & User Friendly**
